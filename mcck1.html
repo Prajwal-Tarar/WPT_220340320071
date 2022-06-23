@@ -16,11 +16,11 @@ $(()=>{
 
         let ajaxdb={
             data:{x:y},
-            url:"http://localhost:9090/getbook",
+            url:"http://localhost:1000/getbook",
             type:'get',
             dataType:"json",
             success:(output=> {
-                if(output.bookfound){
+                if(output){
                     $("#msg").text("Book Found");
                     $("#bname").val(output.bookinfo.bookname);
                     $("#price").val(output.bookinfo.price);
@@ -33,7 +33,7 @@ $(()=>{
             }),
             error:(output)=>{console.log("Some Error")}
         }
-        $,ajax(ajaxdb);
+        $.ajax(ajaxdb);
     });
 
 
@@ -45,7 +45,7 @@ $(()=>{
         };
         let ajaxdbq={
             data:input,
-            url:"http://localhost:9090/getupdate",
+            url:"http://localhost:1000/getupdate",
             type:'get',
             dataType:"json",
             success:(output=> {
@@ -62,7 +62,7 @@ $(()=>{
             }),
             error:(output)=>{console.log("Some Error")}
         }
-        $,ajax(ajaxdbq);
+        $.ajax(ajaxdbq);
         
     });
 

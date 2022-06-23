@@ -8,7 +8,7 @@ let userdata={
     user:"root",
     password:"cdac",
     database:"node1",
-    port:3306,
+    port:3306
 }
 const mysql=require('mysql2');
 const con=mysql.createConnection(userdata);
@@ -47,6 +47,7 @@ app.get("/getbook",(req,resp)=>{
             resp.send(output);
     });
 });
-app.listen(9090);
+
 });
+app.listen(1000);
 
