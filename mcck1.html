@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="jquery-3.5.1.min.js"></script>
+<script>//our scrip will come here 
+
+$(()=>{
+    $("#bid").blur(()=>{
+
+        let y=$("#bid").val();
+
+        let ajaxdb={
+            data:{x:y},
+            url:"http://localhost:9090/getbook",
+            type:'get',
+            dataType:"json",
+            success:(output=> {
+                if(output.bookfound){
+                    $("#msg").text("Book Found");
+                    $("#bname").val(output.bookinfo.bookname);
+                    $("#price").val(output.bookinfo.price);
+                }
+                else{
+                    $("#msg").text("Book Not Found");
+                    $("#bname").val("");
+                    $("#price").val("");
+                }
+            }),
+            error:(output)=>{console.log("Some Error")}
+        }
+        $,ajax(ajaxdb);
+    });
+
+
+    $("#update").click(()=>{
+        let input={
+            bookid:$("#bid").val(),
+            bookname:$("#bname").val(),
+            price:$("#price").val()
+        };
+        let ajaxdbq={
+            data:input,
+            url:"http://localhost:9090/getupdate",
+            type:'get',
+            dataType:"json",
+            success:(output=> {
+                if(output){
+                    $("#msg").text("Update Successfully");
+                   
+                }
+                else{
+                    $("#msg").text("Not Update");
+                    
+                }
+                $("#bname").val("");
+                    $("#price").val("");
+            }),
+            error:(output)=>{console.log("Some Error")}
+        }
+        $,ajax(ajaxdbq);
+        
+    });
+
+});
+</script>
+<body>
+    <input id="bid" type="text" placeholder="bookid..">
+    <span id="msg">Message show</span>
+    <br>
+    <input id="bname" type="text" placeholder="bookname..">
+    <br>
+    <input id="price" type="text" placeholder="bookprice..">
+    <br>
+    <button id="update">UPDATE</button>
+</body>
+</html>
